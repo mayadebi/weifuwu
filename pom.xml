@@ -10,6 +10,7 @@
     <modules>
         <module>user-service</module>
         <module>order-service</module>
+        <module>eureka-server</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -32,6 +33,7 @@
 
     <dependencyManagement>
         <dependencies>
+
             <!-- springCloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
