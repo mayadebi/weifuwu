@@ -14,4 +14,9 @@ public class OrderApplication {
         SpringApplication.run(OrderApplication.class, args);
     }
 
+    // 创建RestTemplate 注册到bean  这个是用来发http请求
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
 }
