@@ -27,3 +27,8 @@ eureka:
 #userservice:
 #  ribbon:
 #    NFloadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#ribbon就第一次访问才会创建负载均衡配置 ，饥饿模式就是一加载项目就创建
+ribbon:
+  eager-load:
+    clients: userservice
+    enabled: true
