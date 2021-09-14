@@ -23,3 +23,7 @@ eureka:
     service-url:
       #      注册中心的地址信息
       defaultZone: http://127.0.0.1:10086/eureka
+#这里配置的负载均衡策略只有userservice会生效
+#userservice:
+#  ribbon:
+#    NFloadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
