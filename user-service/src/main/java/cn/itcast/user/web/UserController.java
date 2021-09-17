@@ -1,10 +1,12 @@
 package cn.itcast.user.web;
 
+import cn.itcast.user.config.PatternProperties;
 import cn.itcast.user.pojo.User;
 import cn.itcast.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -13,17 +15,20 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 @RestController
 @RequestMapping("/user")
+// 这个类配置自动热更新
+//@RefreshScope
 public class UserController {
 
     @Autowired
     private UserService userService;
     // 测试读取配置
-    @Value("${pattern.dateformat}")
-    private String dateformet;
-
+//    @Value("${pattern.dateformat}")
+//    private String dateformet;
+    @Autowired
+    private PatternProperties properties;
     @GetMapping("/now")
     public String now(){
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(dateformet));
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(properties.getDateformat()));
     }
     /**
      * 路径： /user/110
