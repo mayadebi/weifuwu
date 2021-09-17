@@ -6,19 +6,19 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-  application:
-      #    服务名称
-      name: userservice
-  cloud:
-    nacos:
-      server-addr: localhost:8848
-#      设置集群名词
-      discovery:
-        cluster-name: HZ
+#  application:
+#      #    服务名称
+#      name: userservice
+#  cloud:
+#    nacos:
+#      server-addr: localhost:8848
+##      设置集群名词
+#      discovery:
+#        cluster-name: HZ
         #        命名空间ID
 #        namespace: bfca0277-385d-44e3-9517-0764790422e0
 #        设置非临时实例
-        ephemeral: false
+#        ephemeral: false
 mybatis:
   type-aliases-package: cn.itcast.user.pojo
   configuration:
