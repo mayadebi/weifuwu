@@ -15,6 +15,7 @@ spring:
 #      设置集群名词
       discovery:
         cluster-name: FJ
+        namespace: bfca0277-385d-44e3-9517-0764790422e0
 mybatis:
   type-aliases-package: cn.itcast.user.pojo
   configuration:
