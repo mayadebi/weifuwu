@@ -12,6 +12,11 @@
     <artifactId>order-service</artifactId>
 
     <dependencies>
+<!--        feign连接池-->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+        </dependency>
         <!--            http客户端feing-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
