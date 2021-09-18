@@ -2,7 +2,8 @@ package cn.itcast.order;
 
 //import com.netflix.loadbalancer.IRule;
 //import com.netflix.loadbalancer.RandomRule;
-import cn.itcast.order.config.FeignConfig;
+
+import com.fzy.feign.config.FeignConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +12,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 // 开启http客户端自动装配
-@EnableFeignClients()
+// 使用feignapi后要添加扫描包
+@EnableFeignClients(basePackages = "com.fzy.feign.clients",defaultConfiguration = FeignConfig.class)
 @MapperScan("cn.itcast.order.mapper")
 @SpringBootApplication
 public class OrderApplication {

@@ -12,6 +12,12 @@
     <artifactId>order-service</artifactId>
 
     <dependencies>
+<!--        引入feign的api-->
+        <dependency>
+            <groupId>cn.itcast.demo</groupId>
+            <artifactId>feign-api</artifactId>
+            <version>1.0</version>
+        </dependency>
 <!--        feign连接池-->
         <dependency>
             <groupId>io.github.openfeign</groupId>
