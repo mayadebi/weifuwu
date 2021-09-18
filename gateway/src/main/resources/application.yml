@@ -17,3 +17,8 @@ spring:
           uri: lb://orderservice
           predicates:
             - Path=/order/**
+#          添加过滤器  单个服务的过滤器
+          filters:
+            - AddRequestHeader=fzy, niubi #添加一个请求参数
+      default-filters: # 全局配置
+        - AddRequestHeader=admin, niubi
