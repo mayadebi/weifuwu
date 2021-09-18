@@ -45,3 +45,11 @@ logging:
 userservice:
  ribbon:
   NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule # 负载均衡规则
+#配置feign日志级别
+#feign:
+#  client:
+#    config:
+#      default: # default 全局生效  也可以只配userservice
+#        loggerLevel: FULL
+#日志级别  默认是NONE没有日志  BASIC发起请求时会记录请求什么时候发的结束的时间多少
+# HEADERS 会带上请求头和响应头  FULL全部
