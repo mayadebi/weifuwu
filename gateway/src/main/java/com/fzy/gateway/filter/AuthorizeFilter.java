@@ -16,15 +16,16 @@ import reactor.core.publisher.Mono;
 public class AuthorizeFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        ServerHttpRequest request = exchange.getRequest();
-        MultiValueMap<String, String> queryParams = request.getQueryParams();
-        String authorization = queryParams.getFirst("authorization");
-        if("admin".equals(authorization)){
-            // 放行
-           return chain.filter(exchange);
-        }
-        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-        // 拦截
-        return exchange.getResponse().setComplete();
+//        ServerHttpRequest request = exchange.getRequest();
+//        MultiValueMap<String, String> queryParams = request.getQueryParams();
+//        String authorization = queryParams.getFirst("authorization");
+//        if("admin".equals(authorization)){
+//            // 放行
+//           return chain.filter(exchange);
+//        }
+//        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+//        // 拦截
+//        return exchange.getResponse().setComplete();
+        return chain.filter(exchange);
     }
 }
