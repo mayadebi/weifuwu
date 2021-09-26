@@ -35,6 +35,7 @@
 
     <dependencyManagement>
         <dependencies>
+
             <!--necos需要的包-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>

@@ -12,6 +12,16 @@
     <artifactId>user-service</artifactId>
 
     <dependencies>
+        <!--单元测试-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <!--AMQP依赖，包含RabbitMQ-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
 <!--        nacos配置管理依赖-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
