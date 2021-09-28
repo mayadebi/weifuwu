@@ -29,7 +29,7 @@ public class SpringAmqpTest {
             Thread.sleep(20);
         }
     }
-
+    // 消息发送给交换机
     @Test
     public void testSendFanoutExchange() {
         // 交换机名称
