@@ -67,6 +67,11 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+<!--        json的序列化包-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
         <!--单元测试-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

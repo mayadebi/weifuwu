@@ -5,6 +5,8 @@ package cn.itcast.order;
 
 import com.fzy.feign.config.FeignConfig;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -37,4 +39,6 @@ public class OrderApplication {
 //    public IRule randomRule(){
 //        return new RandomRule();
 //    }
+
+
 }

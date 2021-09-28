@@ -7,6 +7,8 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 @Component
 public class SpringRabbitListener {
 //    @RabbitListener(queues = "simple.queue")
@@ -68,6 +70,11 @@ public class SpringRabbitListener {
     ))
     public void listTopicQueue2(String msg){
         System.out.println("消费者8888接收到消息"+msg);
+    }
+
+    @RabbitListener(queues = "object.queue")
+    public void ListObjectQueue(Map<String,String> msg){
+        System.out.println("消费者9999接收到消息"+msg);
     }
 }
 
