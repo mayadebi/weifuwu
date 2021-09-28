@@ -57,6 +57,6 @@ public class SpringAmqpTest {
         // 消息
         String message = "今天天气不错，我的心情好极了!";
         // 发送消息
-        rabbitTemplate.convertAndSend(exchangeName, "china.weather", message);
+        rabbitTemplate.convertAndSend(exchangeName, "china.news", message);
     }
 }

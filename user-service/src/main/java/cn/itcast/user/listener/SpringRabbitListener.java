@@ -51,5 +51,23 @@ public class SpringRabbitListener {
     public void listDirectQueue2(String msg){
         System.out.println("消费者6666接收到消息"+msg);
     }
+
+    // 声明topic交换机
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "topic.queue1"),  // 队列名称
+            exchange = @Exchange(name = "itcast.topic",type = ExchangeTypes.TOPIC),  // 交换机名称
+            key = {"china.#"}
+    ))
+    public void listTopicQueue1(String msg){
+        System.out.println("消费者7777接收到消息"+msg);
+    }
+    @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(name = "topic.queue2"),  // 队列名称
+            exchange = @Exchange(name = "itcast.topic",type = ExchangeTypes.TOPIC),  // 交换机名称
+            key = {"#.news"}
+    ))
+    public void listTopicQueue2(String msg){
+        System.out.println("消费者8888接收到消息"+msg);
+    }
 }
 
