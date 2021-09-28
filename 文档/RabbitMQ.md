@@ -215,7 +215,7 @@ RabbitMQ官方提供了5个不同的Demo示例，对应了不同的消息模型�
 代码实现：
 
 ```java
-package cn.itcast.mq.helloworld;
+package cn.itcast.order.helloworld;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -226,36 +226,36 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 public class PublisherTest {
-    @Test
-    public void testSendMessage() throws IOException, TimeoutException {
-        // 1.建立连接
-        ConnectionFactory factory = new ConnectionFactory();
-        // 1.1.设置连接参数，分别是：主机名、端口号、vhost、用户名、密码
-        factory.setHost("192.168.150.101");
-        factory.setPort(5672);
-        factory.setVirtualHost("/");
-        factory.setUsername("itcast");
-        factory.setPassword("123321");
-        // 1.2.建立连接
-        Connection connection = factory.newConnection();
+  @Test
+  public void testSendMessage() throws IOException, TimeoutException {
+    // 1.建立连接
+    ConnectionFactory factory = new ConnectionFactory();
+    // 1.1.设置连接参数，分别是：主机名、端口号、vhost、用户名、密码
+    factory.setHost("192.168.150.101");
+    factory.setPort(5672);
+    factory.setVirtualHost("/");
+    factory.setUsername("itcast");
+    factory.setPassword("123321");
+    // 1.2.建立连接
+    Connection connection = factory.newConnection();
 
-        // 2.创建通道Channel
-        Channel channel = connection.createChannel();
+    // 2.创建通道Channel
+    Channel channel = connection.createChannel();
 
-        // 3.创建队列
-        String queueName = "simple.queue";
-        channel.queueDeclare(queueName, false, false, false, null);
+    // 3.创建队列
+    String queueName = "simple.queue";
+    channel.queueDeclare(queueName, false, false, false, null);
 
-        // 4.发送消息
-        String message = "hello, rabbitmq!";
-        channel.basicPublish("", queueName, null, message.getBytes());
-        System.out.println("发送消息成功：【" + message + "】");
+    // 4.发送消息
+    String message = "hello, rabbitmq!";
+    channel.basicPublish("", queueName, null, message.getBytes());
+    System.out.println("发送消息成功：【" + message + "】");
 
-        // 5.关闭通道和连接
-        channel.close();
-        connection.close();
+    // 5.关闭通道和连接
+    channel.close();
+    connection.close();
 
-    }
+  }
 }
 ```
 
@@ -279,7 +279,7 @@ public class PublisherTest {
 代码实现：
 
 ```java
-package cn.itcast.mq.helloworld;
+package cn.itcast.order.helloworld;
 
 import com.rabbitmq.client.*;
 
@@ -288,37 +288,37 @@ import java.util.concurrent.TimeoutException;
 
 public class ConsumerTest {
 
-    public static void main(String[] args) throws IOException, TimeoutException {
-        // 1.建立连接
-        ConnectionFactory factory = new ConnectionFactory();
-        // 1.1.设置连接参数，分别是：主机名、端口号、vhost、用户名、密码
-        factory.setHost("192.168.150.101");
-        factory.setPort(5672);
-        factory.setVirtualHost("/");
-        factory.setUsername("itcast");
-        factory.setPassword("123321");
-        // 1.2.建立连接
-        Connection connection = factory.newConnection();
+  public static void main(String[] args) throws IOException, TimeoutException {
+    // 1.建立连接
+    ConnectionFactory factory = new ConnectionFactory();
+    // 1.1.设置连接参数，分别是：主机名、端口号、vhost、用户名、密码
+    factory.setHost("192.168.150.101");
+    factory.setPort(5672);
+    factory.setVirtualHost("/");
+    factory.setUsername("itcast");
+    factory.setPassword("123321");
+    // 1.2.建立连接
+    Connection connection = factory.newConnection();
 
-        // 2.创建通道Channel
-        Channel channel = connection.createChannel();
+    // 2.创建通道Channel
+    Channel channel = connection.createChannel();
 
-        // 3.创建队列
-        String queueName = "simple.queue";
-        channel.queueDeclare(queueName, false, false, false, null);
+    // 3.创建队列
+    String queueName = "simple.queue";
+    channel.queueDeclare(queueName, false, false, false, null);
 
-        // 4.订阅消息
-        channel.basicConsume(queueName, true, new DefaultConsumer(channel){
-            @Override
-            public void handleDelivery(String consumerTag, Envelope envelope,
-                                       AMQP.BasicProperties properties, byte[] body) throws IOException {
-                // 5.处理消息
-                String message = new String(body);
-                System.out.println("接收到消息：【" + message + "】");
-            }
-        });
-        System.out.println("等待接收消息。。。。");
-    }
+    // 4.订阅消息
+    channel.basicConsume(queueName, true, new DefaultConsumer(channel) {
+      @Override
+      public void handleDelivery(String consumerTag, Envelope envelope,
+                                 AMQP.BasicProperties properties, byte[] body) throws IOException {
+        // 5.处理消息
+        String message = new String(body);
+        System.out.println("接收到消息：【" + message + "】");
+      }
+    });
+    System.out.println("等待接收消息。。。。");
+  }
 }
 ```
 
@@ -407,7 +407,7 @@ spring:
 然后在publisher服务中编写测试类SpringAmqpTest，并利用RabbitTemplate实现消息发送：
 
 ```java
-package cn.itcast.mq.spring;
+package cn.itcast.order.spring;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -420,18 +420,18 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class SpringAmqpTest {
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+  @Autowired
+  private RabbitTemplate rabbitTemplate;
 
-    @Test
-    public void testSimpleQueue() {
-        // 队列名称
-        String queueName = "simple.queue";
-        // 消息
-        String message = "hello, spring amqp!";
-        // 发送消息
-        rabbitTemplate.convertAndSend(queueName, message);
-    }
+  @Test
+  public void testSimpleQueue() {
+    // 队列名称
+    String queueName = "simple.queue";
+    // 消息
+    String message = "hello, spring amqp!";
+    // 发送消息
+    rabbitTemplate.convertAndSend(queueName, message);
+  }
 }
 ```
 
@@ -455,10 +455,10 @@ spring:
 
 
 
-然后在consumer服务的`cn.itcast.mq.listener`包中新建一个类SpringRabbitListener，代码如下：
+然后在consumer服务的`cn.itcast.order.listener`包中新建一个类SpringRabbitListener，代码如下：
 
 ```java
-package cn.itcast.mq.listener;
+package cn.itcast.order.listener;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -466,10 +466,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringRabbitListener {
 
-    @RabbitListener(queues = "simple.queue")
-    public void listenSimpleQueueMessage(String msg) throws InterruptedException {
-        System.out.println("spring 消费者接收到消息：【" + msg + "】");
-    }
+  @RabbitListener(queues = "simple.queue")
+  public void listenSimpleQueueMessage(String msg) throws InterruptedException {
+    System.out.println("spring 消费者接收到消息：【" + msg + "】");
+  }
 }
 ```
 
@@ -649,7 +649,7 @@ Spring提供了一个接口Exchange，来表示所有不同类型的交换机：
 在consumer中创建一个类，声明队列和交换机：
 
 ```java
-package cn.itcast.mq.config;
+package cn.itcast.order.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -660,46 +660,46 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class FanoutConfig {
-    /**
-     * 声明交换机
-     * @return Fanout类型交换机
-     */
-    @Bean
-    public FanoutExchange fanoutExchange(){
-        return new FanoutExchange("itcast.fanout");
-    }
+  /**
+   * 声明交换机
+   * @return Fanout类型交换机
+   */
+  @Bean
+  public FanoutExchange fanoutExchange() {
+    return new FanoutExchange("itcast.fanout");
+  }
 
-    /**
-     * 第1个队列
-     */
-    @Bean
-    public Queue fanoutQueue1(){
-        return new Queue("fanout.queue1");
-    }
+  /**
+   * 第1个队列
+   */
+  @Bean
+  public Queue fanoutQueue1() {
+    return new Queue("fanout.queue1");
+  }
 
-    /**
-     * 绑定队列和交换机
-     */
-    @Bean
-    public Binding bindingQueue1(Queue fanoutQueue1, FanoutExchange fanoutExchange){
-        return BindingBuilder.bind(fanoutQueue1).to(fanoutExchange);
-    }
+  /**
+   * 绑定队列和交换机
+   */
+  @Bean
+  public Binding bindingQueue1(Queue fanoutQueue1, FanoutExchange fanoutExchange) {
+    return BindingBuilder.bind(fanoutQueue1).to(fanoutExchange);
+  }
 
-    /**
-     * 第2个队列
-     */
-    @Bean
-    public Queue fanoutQueue2(){
-        return new Queue("fanout.queue2");
-    }
+  /**
+   * 第2个队列
+   */
+  @Bean
+  public Queue fanoutQueue2() {
+    return new Queue("fanout.queue2");
+  }
 
-    /**
-     * 绑定队列和交换机
-     */
-    @Bean
-    public Binding bindingQueue2(Queue fanoutQueue2, FanoutExchange fanoutExchange){
-        return BindingBuilder.bind(fanoutQueue2).to(fanoutExchange);
-    }
+  /**
+   * 绑定队列和交换机
+   */
+  @Bean
+  public Binding bindingQueue2(Queue fanoutQueue2, FanoutExchange fanoutExchange) {
+    return BindingBuilder.bind(fanoutQueue2).to(fanoutExchange);
+  }
 }
 ```
 

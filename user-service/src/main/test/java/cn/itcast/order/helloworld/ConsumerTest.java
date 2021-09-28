@@ -1,4 +1,4 @@
-package cn.itcast.mq.helloworld;
+package cn.itcast.order.helloworld;
 
 import com.rabbitmq.client.*;
 
