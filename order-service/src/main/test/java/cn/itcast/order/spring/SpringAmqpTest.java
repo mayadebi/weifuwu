@@ -47,7 +47,7 @@ public class SpringAmqpTest {
         // 消息
         String message = "hello, red!";
         // 发送消息
-        rabbitTemplate.convertAndSend(exchangeName, "red", message);
+        rabbitTemplate.convertAndSend(exchangeName, "fzy2", message);
     }
 
     @Test
